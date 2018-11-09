@@ -19,7 +19,7 @@ class Transfer
       @previous_amount = @amount
       @amount = 0
       @status = "complete"
-      
+
 
     else
       @status = "rejected"
@@ -30,5 +30,6 @@ class Transfer
   def reverse_transfer
     @sender.deposit(@previous_amount)
     @receiver.deposit(-@previous_amount)
+    @status = "reversed"
   end
 end
