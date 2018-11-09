@@ -15,8 +15,8 @@ class BankAccount
     "Your balance is $#{@balance}."
   end
 
-  def valid?
-    @status == "open" && @balance > 0
+  def valid?(balance=0)
+    @status == "open" && @balance > balance
   end
 
   def close_account
