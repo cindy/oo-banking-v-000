@@ -5,6 +5,7 @@ class Transfer
     @receiver = receiver
     @amount = amount
     @status = "pending"
+    @previous_amount = 0
   end
 
   def valid?
@@ -15,8 +16,10 @@ class Transfer
     if self.valid?
       @sender.deposit(-@amount)
       @receiver.deposit(@amount)
+      @previous_amount = @amount
       @amount = 0
       @status = "complete"
+      
 
     else
       @status = "rejected"
@@ -25,4 +28,7 @@ class Transfer
   end
 
   def reverse_transfer
+    @sender.deposit(@previous_amount)
+    @receiver.deposit(-@previous_amount)
+  end
 end
